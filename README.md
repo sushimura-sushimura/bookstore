@@ -1,1 +1,1 @@
-# bookstore
+# 本のECサイト
