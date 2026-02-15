@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Bookstore',
+  title: 'BookStore',
   description: '本のECサイト',
 };
 

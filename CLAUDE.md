@@ -211,19 +211,21 @@ type CartItem = {
 
 ### MVP 2: カートに追加できる
 **ゴール**: "Add to Cart"ボタンでカートにアイテムが追加され、ヘッダーにバッジ表示
-**学ぶこと**: Client Component vs Server Component, React Context, useState, localStorage
+**学ぶこと**: Client Component vs Server Component, React Context, useState, localStorage, Props vs State の違い
 
 ステップ:
 1. `src/types/index.ts` — CartItem型を追加
-2. `src/contexts/CartContext.tsx` — カート状態管理を作成
+2. `src/contexts/CartContext.tsx` — カート状態管理を作成（State でカートの中身を管理）
 3. `src/components/Header.tsx` — ナビバー + カートバッジ
 4. `src/app/layout.tsx` — CartProviderとHeaderを組み込み
 5. `src/app/books/[id]/AddToCartButton.tsx` — Client Componentとしてカート追加ボタン
 6. 動作確認（追加 → バッジ更新 → リロードで復元）
 
+**学習ポイント**: カートの追加機能を通じて、State（自分で変更できるデータ）と Props（親から渡される読み取り専用データ）の違いを体感する
+
 ### MVP 3: カートページで管理できる
 **ゴール**: カート内のアイテム一覧、数量変更、削除、合計金額表示
-**学ぶこと**: イベントハンドリング, 状態更新, 条件付きレンダリング
+**学ぶこと**: イベントハンドリング, 状態更新, 条件付きレンダリング, `.map()` における `key` の重要性
 
 ステップ:
 1. `src/components/CartItem.tsx` — カート内1アイテム行（数量+/- と削除）
@@ -231,9 +233,13 @@ type CartItem = {
 3. `src/app/cart/page.tsx` — カートページ（空表示 / アイテム一覧 + サマリー）
 4. 動作確認
 
+**学習ポイント**: カートのアイテム削除・数量変更を通じて、`.map()` で並べたリストに `key` が必要な理由を実感する（key がないとReactがどの要素を更新・削除すべきか区別できず、意図しない動作になる）
+
 ### MVP 4（将来）: APIルート
 **ゴール**: `/api/books` と `/api/books/[id]` のREST APIエンドポイント
-**学ぶこと**: Next.js Route Handlers, REST API, HTTPステータスコード
+**学ぶこと**: Next.js Route Handlers, REST API, HTTPステータスコード, TypeScriptジェネリクス
+
+**学習ポイント**: APIレスポンスの型定義にジェネリクス（`<T>`）を導入する。`ApiResponse<Book>` や `ApiResponse<Book[]>` のように、同じレスポンス構造で中身の型だけ変えられる仕組みを体験し、型の再利用性を学ぶ
 
 ## 8. 設計上のポイント・判断メモ
 
@@ -274,3 +280,4 @@ MVP完成時に以下を全て確認する:
 - 画像最適化（next/image + 外部ストレージ）
 - 検索・フィルタリング機能
 - テスト（Jest + React Testing Library）
+- **レスポンシブ対応（書籍一覧）**: 画面幅を狭くしたときに BookCard のサイズが小さくなりすぎないよう、最小幅（minmax）を設定し、横スクロールで全カードを閲覧できるようにする
