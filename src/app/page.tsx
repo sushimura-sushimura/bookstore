@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import books from '@/data/books.json';
 import type { Book } from '@/types';
 import BookCard from '@/components/BookCard';
