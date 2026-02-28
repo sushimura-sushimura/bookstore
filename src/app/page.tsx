@@ -17,7 +17,11 @@ export default function Home() {
       <h2 className='text-xl font-bold mb-4'>Amazon風カード</h2>
       <div className='grid grid-cols-3 gap-6'>
         {books.map((book: Book) => (
-          <BookCardAmazon key={book.id} book={book} />
+          <BookCardAmazon
+            key={book.id}
+            book={book}
+            href={`/books/${book.id}`}
+          />
         ))}
       </div>
     </div>

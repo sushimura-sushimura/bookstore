@@ -1,13 +1,11 @@
 import type { Book } from '@/types';
 import Link from 'next/link';
+import AddToCartButton from './AddToCartButton';
 
-function BookCardAmazon({ book }: { book: Book }) {
+function BookCardAmazon({ book, href }: { book: Book; href: string }) {
   return (
-    <Link
-      href={`/sample/books/${book.id}`}
-      className='hover:-translate-y-1 hover:shadow-lg transition duration-200'
-    >
-      <div className='bg-white border border-gray-200 rounded p-4 shadow-sm'>
+    <div className='bg-white border border-gray-200 rounded p-4 shadow-sm hover:-translate-y-1 hover:shadow-lg transition duration-200'>
+      <Link href={href}>
         {/* バッジ（ベストセラーなど） */}
         <div className='mb-2'>
           <span className='text-xs bg-orange-100 text-orange-800 px-2 py-0.5 rounded'>
@@ -38,16 +36,10 @@ function BookCardAmazon({ book }: { book: Book }) {
         <p className='text-base font-bold text-gray-900 mb-3'>
           ¥{book.price.toLocaleString()}
         </p>
-
-        {/* カートボタン（プレースホルダー） */}
-        <button
-          type='submit'
-          className='w-full bg-amber-400 hover:bg-amber-500 text-gray-900 text-sm font-medium py-2 px-4 rounded'
-        >
-          カートに入れる
-        </button>
-      </div>
-    </Link>
+      </Link>
+      {/* カートボタン（プレースホルダー） */}
+      <AddToCartButton />
+    </div>
   );
 }
 
